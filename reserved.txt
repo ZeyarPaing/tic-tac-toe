@@ -1,0 +1,45 @@
+const [gameState, setGameState] = useState([
+				[0,0,0],
+				[0,0,0],
+				[0,0,0],
+]);
+const [turn, setTurn] = useState(true);
+function  handleGameState(rIdx:any, cIdx:any) {
+				console.log("Clicked");
+				let turnNum :any = turn ? 1: 2;
+				setTurn(!turn);
+				let prevGameState = gameState;
+				prevGameState[rIdx][cIdx] = turnNum;
+				setGameState(prevGameState)
+				if(checkGame()) alert("Player "+ turn + " wins");
+}
+function checkGame():boolean {
+				for(let i of gameState) {
+								if (i.every((ele) => ele === 1)) return true;
+				}
+				return false;
+}
+{gameState.map((row, rIdx) => (
+		<div className="row">
+				{row.map((col, cIdx) => (
+								<div key={""+row+rIdx+cIdx+col}>
+												<Block returnInfo={() => setTurn(!turn)} turn={turn ? 'X': 'O'}/>
+								</div>
+				))}
+		</div>
+))
+}
+
+//Block
+const [isChecked, setIsChecked] = useState(false);
+const [turn, setTurn] = useState("")
+return <div onClick={() => {
+				setIsChecked(true);
+				props.returnInfo();
+				setTurn(turn || props.turn);
+				console.log("inside block", isChecked, turn);
+}} className="block">
+				{
+								isChecked && <span>{turn}</span>
+				}
+</div>
