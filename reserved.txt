@@ -43,3 +43,4 @@ return <div onClick={() => {
 								isChecked && <span>{turn}</span>
 				}
 </div>
+//Edited from github
